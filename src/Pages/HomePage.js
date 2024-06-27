@@ -1,8 +1,13 @@
 import React from 'react'
+import NavBar from '../Components/NavBar'
+import Contents from '../Components/Contents'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+        <NavBar title="Task Master" />
+        <Contents />
+    </div>
   )
 }
 
