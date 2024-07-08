@@ -40,7 +40,7 @@ const ItemList = () => {
 
   return (
     <div>
-      <Grid container spacing={3} display={"block"}>
+      <Grid container spacing={3} sx={{padding:"2vw 5vh",display:"flex"}}> 
         {items.map((item, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
             <Item item={item} />
