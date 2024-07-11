@@ -10,17 +10,18 @@ const taskSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  completed: {
-    type: Boolean,
-    default: false,
+  status: {
+    type: String,
+    enum: ["Pending", "In Progress", "Completed"],
+    default: "Pending",
   },
   dueDate: {
     type: Date,
   },
   category: {
-    type:String,
-    trim:true,
-    required: false
+    type: String,
+    trim: true,
+    required: false,
   },
   createdAt: {
     type: Date,

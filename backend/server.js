@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDatabase = require("./config/db");
 const taskRoutes = require('./route/taskRoutes');
+const cors = require('cors'); // Import the cors package
 const path = require("path");
 
 // Load environment variables
@@ -12,7 +13,11 @@ connectDatabase();
 
 const app = express();
 
-// Middleware to parse JSON
+// Use CORS middleware with specific origin
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 app.use(express.json());
 
 // Task routes

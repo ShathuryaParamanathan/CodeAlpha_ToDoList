@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, TextField, MenuItem, Select, FormControl, Button, IconButton } from '@mui/material';
-//import { AccountCircle } from '@mui/icons-material';
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const NavBar = (props) => {
   const [searchValue, setSearchValue] = useState('');
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('');
-
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     if (props.onSearchChange) {
@@ -14,6 +12,9 @@ const NavBar = (props) => {
     }
   };
 
+  const handleAddStatus =()=>{
+    props.setAddMode(true);
+  }
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
     if (props.onFilterChange) {
@@ -31,7 +32,7 @@ const NavBar = (props) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Typography variant="h3" sx={{ flexGrow: 1 }}>
           {props.title}
         </Typography>
         <TextField
@@ -43,6 +44,7 @@ const NavBar = (props) => {
           size="small"
           sx={{ backgroundColor: "white", marginRight: 2 }}
         />
+        <Button sx={{color:"#fff"}} onClick={handleAddStatus} >Add Task</Button>
         <FormControl variant="outlined" size="small" sx={{ minWidth: 120, marginRight: 2 }}>
           <Select
             value={filter}
@@ -53,8 +55,8 @@ const NavBar = (props) => {
               <em>All</em>
             </MenuItem>
             <MenuItem value="completed">Completed</MenuItem>
+            <MenuItem value="progress">In Progress</MenuItem>
             <MenuItem value="pending">Pending</MenuItem>
-            <MenuItem value="high-priority">High Priority</MenuItem>
           </Select>
         </FormControl>
         <FormControl variant="outlined" size="small" sx={{ minWidth: 120, marginRight: 2 }}>
@@ -76,7 +78,7 @@ const NavBar = (props) => {
           color="inherit"
           aria-label="account"
         >
-          {/* <AccountCircle /> */}
+          <AccountCircleIcon />
         </IconButton>
       </Toolbar>
     </AppBar>

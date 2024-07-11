@@ -1,6 +1,5 @@
 const Task = require('../model/TaskModel');
 
-
 const getAllTask = async (req, res) => {
   try {
     const tasks = await Task.find();
@@ -26,7 +25,7 @@ const createTask = async (req, res) => {
   try {
     const task = new Task(req.body);
     await task.save();
-    res.status(201).json(task);
+    res.status(201).json({ message: "Task successfully created" });
   } catch (error) {
     res.status(400).json({ message: "Error creating task", error });
   }
@@ -34,7 +33,7 @@ const createTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["title", "description", "completed", "dueDate","category"];
+  const allowedUpdates = ["title", "description", "status", "dueDate", "category"];
   const isValidOperation = updates.every(update => allowedUpdates.includes(update));
 
   if (!isValidOperation) {
@@ -74,4 +73,3 @@ module.exports = {
   updateTask,
   deleteTask
 };
-
