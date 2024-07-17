@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Grid } from "@mui/material";
-import Item from "./Item"; // Import the Item component
+import Item from "./Item"; 
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -11,7 +11,7 @@ const ItemList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/tasks"); // Replace with your actual API endpoint
+        const response = await axios.get("http://localhost:5000/api/tasks"); 
         setItems(response.data);
         setLoading(false);
       } catch (error) {

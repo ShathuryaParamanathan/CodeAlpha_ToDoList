@@ -20,7 +20,7 @@ const Item = ({ item }) => {
   const [tempTitle, setTempTitle] = useState(item.title);
   const [tempDescription, setTempDescription] = useState(item.description);
   const [tempCategory, setTempCategory] = useState(item.category);
-  const [tempDueDate, setTempDueDate] = useState(item.dueDate);
+  const [tempDueDate, setTempDueDate] = useState(new Date(item.dueDate).toISOString().slice(0, 16));
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
@@ -47,7 +47,7 @@ const Item = ({ item }) => {
       setTempTitle(item.title);
       setTempDescription(item.description);
       setTempCategory(item.category);
-      setTempDueDate(item.dueDate);
+      setTempDueDate(new Date(item.dueDate).toISOString().slice(0, 16));
       setStatus(item.status);
     }
     setIsEditing((prev) => !prev);
@@ -58,7 +58,7 @@ const Item = ({ item }) => {
       title: tempTitle,
       description: tempDescription,
       category: tempCategory,
-      dueDate: tempDueDate,
+      dueDate: new Date(tempDueDate).toISOString(), // Convert back to ISO format for database storage
       status
     };
 
@@ -73,7 +73,7 @@ const Item = ({ item }) => {
     setTempTitle(item.title);
     setTempDescription(item.description);
     setTempCategory(item.category);
-    setTempDueDate(item.dueDate);
+    setTempDueDate(new Date(item.dueDate).toISOString().slice(0, 16));
     setStatus(item.status);
     setIsEditing(false);
   };
