@@ -9,6 +9,18 @@ const getAllTask = async (req, res) => {
   }
 };
 
+const getSpecficTask = async (req, res) => {
+  try {
+    const filter = req.params.filter;
+    const query = { status: filter }; 
+    const tasks = await Task.find(query);
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching tasks", error });
+  }
+};
+
+
 const getTaskById = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -68,6 +80,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
   getAllTask,
+  getSpecficTask,
   getTaskById,
   createTask,
   updateTask,

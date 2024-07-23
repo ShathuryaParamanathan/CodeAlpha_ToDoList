@@ -1,17 +1,12 @@
-import React, { useState } from 'react'
-import NavBar from '../Components/NavBar'
-import Contents from '../Components/Contents'
-import AddTask from '../Components/AddTask'
+import React from "react";
+import NavBar from "../Components/NavBar";
 
 const HomePage = () => {
-  const [addMode, setAddMode] = useState(false);
   return (
     <div>
-        <NavBar title="Task Master"  addMode={addMode}  setAddMode={setAddMode} />
-        {addMode ? <AddTask addMode={addMode} setAddMode={setAddMode} /> :<Contents />  }
-        
+      <NavBar title="Task Master" />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

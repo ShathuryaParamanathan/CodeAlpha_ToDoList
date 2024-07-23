@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Grid, Button, TextField, Box, Typography, Snackbar, Alert } from '@mui/material';
 import axios from 'axios';
 import AddTaskImage from '../Assets/addTask.png';
+import { useNavigate } from 'react-router-dom';
+import NavBar2 from './NavBar2';
 
 const AddTask = ({ addMode, setAddMode }) => {
   const [newTask, setNewTask] = useState({
@@ -13,7 +15,7 @@ const AddTask = ({ addMode, setAddMode }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-
+const navigate =useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewTask((prevTask) => ({
@@ -34,7 +36,7 @@ const AddTask = ({ addMode, setAddMode }) => {
       
       setSnackbarMessage('Task successfully created');
       setSnackbarSeverity('success');
-      setAddMode(false);
+      //setAddMode(false);
     } catch (error) {
       setSnackbarMessage('Error creating task: ' + error.message);
       setSnackbarSeverity('error');
@@ -50,7 +52,8 @@ const AddTask = ({ addMode, setAddMode }) => {
       category: '',
       dueDate: '',
     });
-    setAddMode(false);
+    // setAddMode(false);
+    navigate('/');
   };
 
   const handleCloseSnackbar = () => {
@@ -59,7 +62,9 @@ const AddTask = ({ addMode, setAddMode }) => {
 
   return (
     <Grid container spacing={2} sx={{ marginBottom: '20px', padding: "40px" }}>
+     
       <Grid item xs={12} md={6}>
+      <NavBar2 heading="Task Manager"/>
         <Box
           sx={{
             p: 4,
@@ -68,7 +73,7 @@ const AddTask = ({ addMode, setAddMode }) => {
             backgroundColor: 'background.paper',
           }}
         >
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h5" gutterBottom>
             Create New Task
           </Typography>
           <Grid container spacing={2}>
@@ -135,7 +140,7 @@ const AddTask = ({ addMode, setAddMode }) => {
         <img
           src={AddTaskImage}
           alt="Task Illustration"
-          style={{ maxWidth: '100%', maxHeight: '100%', borderRadius: '8px' }}
+          style={{ width: '100%', height: '75vh', borderRadius: '8px' }}
         />
       </Grid>
       <Snackbar

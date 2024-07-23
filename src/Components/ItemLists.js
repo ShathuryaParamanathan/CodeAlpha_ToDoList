@@ -3,7 +3,7 @@ import axios from "axios";
 import { Grid } from "@mui/material";
 import Item from "./Item"; 
 
-const ItemList = () => {
+const ItemList = ({filter}) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,10 @@ const ItemList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/tasks"); 
+        console.log(filter);
+        const response = await axios.get(`http://localhost:5000/api/tasks/${filter}`); 
+
+        // console.log(response);
         setItems(response.data);
         setLoading(false);
       } catch (error) {
