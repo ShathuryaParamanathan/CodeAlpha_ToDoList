@@ -52,24 +52,24 @@ const Item = ({ item }) => {
     }
     setIsEditing((prev) => !prev);
   };
-
+  const handleDelete =async()=>{
+    await axios.delete(`http://localhost:5000/api/tasks/delete/${item._id}`)
+  }
   const saveChanges = async () => {
     const updatedItem = {
       title: tempTitle,
       description: tempDescription,
       category: tempCategory,
-      dueDate: new Date(tempDueDate).toISOString(), // Convert back to ISO format for database storage
+      dueDate: new Date(tempDueDate).toISOString(),
       status
     };
 
-    // Update the backend
     await axios.put(`http://localhost:5000/api/tasks/editTask/${item._id}`, updatedItem);
     
     setIsEditing(false);
   };
 
   const cancelChanges = () => {
-    // Reset all temp states to the original values
     setTempTitle(item.title);
     setTempDescription(item.description);
     setTempCategory(item.category);
@@ -79,7 +79,7 @@ const Item = ({ item }) => {
   };
 
   return (
-    <Grid container spacing={2} sx={{ backgroundColor: "#f1f1f1", padding: "10px", width: "300px", borderRadius: "20px" }}>
+    <Grid container spacing={2} sx={{ backgroundColor: "#f1f1f1", padding: "10px 0", width: "300px", borderRadius: "20px" }}>
       <Grid item xs={12}>
         {isEditing ? (
           <TextField
@@ -138,7 +138,7 @@ const Item = ({ item }) => {
             <InputLabel>Status</InputLabel>
             <Select value={status} onChange={handleStatusChange} label="Status">
               <MenuItem value="Pending">Pending</MenuItem>
-              <MenuItem value="In Progress">In Progress</MenuItem>
+              <MenuItem value="InProgress">In Progress</MenuItem>
               <MenuItem value="Completed">Completed</MenuItem>
             </Select>
           </FormControl>
@@ -157,9 +157,14 @@ const Item = ({ item }) => {
             </Button>
           </Box>
         ) : (
-          <Button variant="contained" color="primary" onClick={toggleEditMode}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Button variant="contained" color="primary" onClick={toggleEditMode} >
             Edit
           </Button>
+           <Button variant="contained" color="primary" onClick={handleDelete}>
+           Delete
+         </Button>
+         </Box>
         )}
       </Grid>
     </Grid>

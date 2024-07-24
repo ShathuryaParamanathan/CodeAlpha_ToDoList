@@ -5,7 +5,7 @@ import AddTaskImage from '../Assets/addTask.png';
 import { useNavigate } from 'react-router-dom';
 import NavBar2 from './NavBar2';
 
-const AddTask = ({ addMode, setAddMode }) => {
+const AddTask = () => {
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
@@ -15,7 +15,8 @@ const AddTask = ({ addMode, setAddMode }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-const navigate =useNavigate();
+  const navigate = useNavigate();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewTask((prevTask) => ({
@@ -33,14 +34,16 @@ const navigate =useNavigate();
         category: '',
         dueDate: '',
       });
-      
+
       setSnackbarMessage('Task successfully created');
       setSnackbarSeverity('success');
-      //setAddMode(false);
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 3000); // Navigate after 3 seconds
     } catch (error) {
       setSnackbarMessage('Error creating task: ' + error.message);
       setSnackbarSeverity('error');
-    } finally {
       setSnackbarOpen(true);
     }
   };
@@ -52,7 +55,6 @@ const navigate =useNavigate();
       category: '',
       dueDate: '',
     });
-    // setAddMode(false);
     navigate('/');
   };
 
@@ -61,10 +63,9 @@ const navigate =useNavigate();
   };
 
   return (
-    <Grid container spacing={2} sx={{ marginBottom: '20px', padding: "40px" }}>
-     
+    <Grid container spacing={2} sx={{ marginBottom: '20px', padding: '40px' }}>
       <Grid item xs={12} md={6}>
-      <NavBar2 heading="Task Manager"/>
+        <NavBar2 heading="Task Manager" />
         <Box
           sx={{
             p: 4,

@@ -1,11 +1,13 @@
-import React from "react";
-import Items from "./ItemLists";
-import { Grid } from "@mui/material";
+import React from 'react';
+import Items from './ItemLists';
+import { Grid } from '@mui/material';
 
-const Contents = ({filter,sort,searchValue}) => {
+const Contents = ({ filter, searchValue }) => {
   return (
-    <Grid md={10} sx={{padding:"20px"}} >
-      <Items filter={filter} />
+    <Grid container justifyContent="center" sx={{ padding: "20px" }}>
+      <Grid item md={10}>
+        <Items filter={filter} searchValue={searchValue} />
+      </Grid>
     </Grid>
   );
 };
